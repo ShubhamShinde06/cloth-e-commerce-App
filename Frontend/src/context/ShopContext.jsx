@@ -10,7 +10,7 @@ const ShopContextProvider = (props) => {
 
     const currency = "₹"
     const delivery_fee = 100
-    const server = "http://localhost:8000"
+    const server = "https://cloth-e-commerce-47l9.onrender.com"
     const navigate = useNavigate(); 
 
     const [search, setSearch] = useState('');

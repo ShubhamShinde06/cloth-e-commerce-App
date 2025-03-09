@@ -9,7 +9,7 @@ import Login from "./components/Login"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const srever = "http://localhost:8000"
+export const srever = "https://cloth-e-commerce-47l9.onrender.com"
 export const currency = '₹'
 
 function App() {
