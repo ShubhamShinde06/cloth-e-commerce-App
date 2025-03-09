@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 
 const Add = ({token}) => {
   
+  const [loading, setLoading] = useState(false)
 
   const [image1,setImage1] = useState(false)
   const [image2,setImage2] = useState(false)
@@ -27,7 +28,7 @@ const Add = ({token}) => {
 
   const onSumitHandler = async (e) => {
     e.preventDefault()
-
+    setLoading(true)
     try {
       
       const formData = new FormData()
@@ -47,6 +48,7 @@ const Add = ({token}) => {
 
       const response = await axios.post(srever + '/api/product/add', formData, {headers:{token}})
       if(response.data.success){
+        setLoading(false)
         toast.success(response.data.message)
         setName('')
         setDescription('')
@@ -54,15 +56,19 @@ const Add = ({token}) => {
         setImage2(false)
         setImage3(false)
         setImage4(false)
+        setBestseller(false)
+        setSizes([])
         setPrice('')
       }
       else {
         toast.error(response.data.message)
+        setLoading(false)
       }
 
     } catch (error) {
       console.log(error)
       toast.error(error.message)
+      setLoading(false)
     }
   }
 
@@ -200,7 +206,7 @@ const Add = ({token}) => {
           <label className=' cursor-pointer' htmlFor="bestseller">Add to bestseller</label>
         </div>
 
-        <button type='submit' className='w-28 py-3 mt-4 bg-black text-white rounded'>ADD</button>
+        <button type='submit' className='w-28 py-3 mt-4 bg-black text-white rounded'>{loading ? 'Loading..': 'ADD'}</button>
 
       </form>
     </div>
