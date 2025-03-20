@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import Title from './Title'
 import ProductItem from './ProductItem'
+import { motion } from "framer-motion";
 
 
 const LatestCollection = () => {
 
-    const {products} = useContext(ShopContext)
+    const {products, loading} = useContext(ShopContext)
     const [latestProducts, setLatestProducts] = useState([])
 
     useEffect(() => {
@@ -28,6 +29,18 @@ const LatestCollection = () => {
         {/* rendering product */}
         <div className='grid grid-cols-2 sm:grid:cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6'>
         {
+            loading
+            ?
+            [...Array(5)].map((_, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-[200px] h-[300px] bg-gray-300 animate-pulse rounded-lg"
+                ></motion.div>
+              ))
+            :
             latestProducts.map((item, index) => (
                 <ProductItem
                     key={index}
